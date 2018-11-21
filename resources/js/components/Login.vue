@@ -64,10 +64,12 @@
                 this.errors = [];
                 this.loading = true;
                 axios.post('/login', {
-                    email: this.email, password: this.password, remember: this.remember
+                    email: this.email,
+                    password: this.password,
+                    remember: this.remember
                 }).then(resp => {
-                    console.log(resp);
-                    // location.reload()
+                    // console.log(resp);
+                    location.reload()
                 }).catch(error => {
                     this.loading = false;
                     if(error.response.status == 422) {
