@@ -5,11 +5,13 @@
                 <h5 class="text-uppercase text-center">Login</h5>
                 <br><br>
                 <form>
+
                     <ul class="alert alert-danger" v-if="errors.length > 0">
                         <p class="text-center" v-for="error in errors" :key="errors.indexOf(error)">
                             {{ error }}
                         </p>
                     </ul>
+
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Email" v-model="email">
                     </div>
