@@ -10,6 +10,21 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
+    
+    public function test_correct_responsse_after_user_logs_in()
+    {
+        $user = factory(User::class)->create();
+
+        $this->postJson('/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ])
+            ->assertStatus(200)
+            ->assertJson([
+                'status' => 'ok'
+            ])
+            ->assertSessionHas('success', 'Successfully logged in.');
+    } 
     /**
      * A basic test example.
      *
