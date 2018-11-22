@@ -1,10 +1,10 @@
 @component('mail::message')
-# Introduction
+# One more step before joining my app!
 
-The body of your message.
+We need you to confirm your email.
 
 @component('mail::button', ['url' => ''])
-Button Text
+Confirm email
 @endcomponent
 
 Thanks,<br>
