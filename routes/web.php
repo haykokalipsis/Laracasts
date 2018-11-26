@@ -25,3 +25,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', function() {
     return new App\Mail\ConfirmYourEmail();
 });
+
+Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
