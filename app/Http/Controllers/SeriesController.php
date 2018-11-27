@@ -36,19 +36,29 @@ class SeriesController extends Controller
      */
     public function store(CreateSeriesRequest $request)
     {
-        $uploadedImage = $request->image;
-        $fileName = str_slug($request->title) . '.' . $uploadedImage->getClientOriginalExtension();
-        $image = $uploadedImage->storePubliclyAs('series', $fileName);
+        $request->uploadSeriesImage()
+            ->storeSeries();
 
-        Series::create([
-            'title' => $request->title,
-            'slug' => str_slug($request->title),
-            'description' => $request->description,
-            'image_url' => 'series/' . $fileName
-        ]);
+        session()->flash('success', 'Series created successfully');
 
         return redirect()->back();
     }
+
+//    public function store_before_refactoring(CreateSeriesRequest $request)
+//    {
+//        $uploadedImage = $request->image;
+//        $fileName = str_slug($request->title) . '.' . $uploadedImage->getClientOriginalExtension();
+//        $image = $uploadedImage->storePubliclyAs('series', $fileName);
+//
+//        Series::create([
+//            'title' => $request->title,
+//            'slug' => str_slug($request->title),
+//            'description' => $request->description,
+//            'image_url' => 'series/' . $fileName
+//        ]);
+//
+//        return redirect()->back();
+//    }
 
     /**
      * Display the specified resource.
