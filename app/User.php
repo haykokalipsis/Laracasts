@@ -60,5 +60,10 @@ class User extends Authenticatable
     {
         $this->confirm_token = null;
         $this->save();
-    } 
+    }
+
+    public function isAdmin()
+    {
+        return in_array($this->email, config('myConfig.administrators'));
+    }
 }
