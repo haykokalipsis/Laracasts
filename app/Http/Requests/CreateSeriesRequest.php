@@ -50,7 +50,7 @@ class CreateSeriesRequest extends FormRequest
         ]);
 
         session()->flash('success', 'Series created successfully');
-        return redirect()->route('series.show', $series->id);
+        return redirect()->route('series.show', $series->slug);
     } 
     
 }
