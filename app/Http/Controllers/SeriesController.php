@@ -65,7 +65,8 @@ class SeriesController extends Controller
     public function show(Series $series)
     {
 //        dd(Series::find($id) );
-        dd($series);
+//        dd($series);
+        return view('admin.series.index')->with('series', $series);
     }
 
     /**
