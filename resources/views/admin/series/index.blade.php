@@ -25,6 +25,7 @@
 
             <div class="row gap-y">
                 <div class="col-12">
+                    {{ $series->Lessons->first()->title }}
                     {{--<vue-lessons default_lessons="{{ $series->lessons }}" series_id="{{ $series->id }}"></vue-lessons>--}}
                 </div>
             </div>
