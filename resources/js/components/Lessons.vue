@@ -20,7 +20,7 @@
 <script>
     export default {
         name: 'Lessons',
-        props: ['default_lessons'],
+        props: ['default_lessons', 'series_id'],
         data() {
             return {
                 lessons: this.default_lessons
@@ -33,7 +33,7 @@
         },
         methods: {
             createNewLesson() {
-                this.$emit('create_new_lesson')
+                this.$emit('create_new_lesson', this.series_id)
             }
         },
         components: {

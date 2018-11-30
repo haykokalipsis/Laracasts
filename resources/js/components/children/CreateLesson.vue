@@ -31,7 +31,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Lesson</button>
+                    <button type="button" class="btn btn-primary" @click="createLesson()">Create Lesson</button>
                 </div>
 
             </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import Axios from 'axios';
 
     export default {
 
@@ -50,12 +50,27 @@
                 title: '',
                 video_id: '',
                 episode_number: '',
-                description: ''
+                description: '',
+                seriesId: ''
+            }
+        },
+        methods: {
+            createLesson() {
+                let newLesson = {
+                    title: this.title,
+                    video_id: this.video_id,
+                    episode_number: this.episode_number,
+                    description: this.description
+                };
+
+                Axios.post(`/admin/${this.seriesId}/lessons`, newLesson)
+                    .then( (response) => console.log(response))
+                    .catch( (error) => console.error(error));
             }
         },
         mounted() {
-            this.$parent.$on('create_new_lesson', () =>{
-                console.log('Hello parent');
+            this.$parent.$on('create_new_lesson', (seriesId) =>{
+                this.seriesId = seriesId;
                 $('#createLesson').modal();
             });
         }

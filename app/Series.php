@@ -19,7 +19,7 @@ class Series extends Model
         return 'slug';
     }
 
-    public function Lessons()
+    public function lessons()
     {
         return $this->hasMany(Lesson::class);
     }
