@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateLessonRequest;
+use App\Lesson;
 use App\Series;
 use Illuminate\Http\Request;
 
@@ -76,11 +77,14 @@ class LessonsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Series $series, Lesson $lesson)
     {
-        //
+        $lesson->delete();
+
+        return response()->json(['status' => 'ok'], 200);
     }
 }
