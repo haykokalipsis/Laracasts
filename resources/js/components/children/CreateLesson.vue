@@ -64,7 +64,10 @@
                 };
 
                 Axios.post(`/admin/${this.seriesId}/lessons`, newLesson)
-                    .then( (response) => console.log(response))
+                    .then( (response) => {
+                        this.$parent.$emit('lesson_created', response.data);
+                        $('#createLesson').modal('hide');
+                    })
                     .catch( (error) => console.error(error));
             }
         },

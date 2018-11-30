@@ -7,7 +7,7 @@
         </h1>
 
         <ul class="list-group">
-            <li class="list-group-item" v-for="lesson in formattedLessons">
+            <li class="list-group-item" v-for="lesson in lessons">
                 {{ lesson.title}}
             </li>
         </ul>
@@ -22,15 +22,15 @@
         name: 'Lessons',
         props: ['default_lessons', 'series_id'],
         data() {
-            return {
-                lessons: this.default_lessons
+            return  {
+                lessons: JSON.parse(this.default_lessons)
             }
         },
-        computed: {
-            formattedLessons() {
-                return JSON.parse(this.lessons)
-            }
-        },
+        // computed: {
+        //     formattedLessons() {
+        //         return JSON.parse(this.lessons)
+        //     }
+        // },
         methods: {
             createNewLesson() {
                 this.$emit('create_new_lesson', this.series_id)
@@ -38,6 +38,11 @@
         },
         components: {
             "create-lesson": require('./children/CreateLesson.vue')
+        },
+        mounted() {
+            this.$on('lesson_created', (payLoad) => {
+                this.lessons.push(payLoad);
+            });
         }
     }
 </script>
