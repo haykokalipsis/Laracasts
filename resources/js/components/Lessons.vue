@@ -10,7 +10,7 @@
             <li class="list-group-item d-flex justify-content-between" v-for="lesson, key in lessons">
                 <p>{{ lesson.title}}</p>
                 <p>
-                    <button class="btn btn-primary btn-xs">Edit</button>
+                    <button class="btn btn-primary btn-xs" @click="editLesson(lesson)">Edit</button>
                     <button class="btn btn-danger btn-xs" @click="deleteLesson(lesson.id, key)">Delete</button>
                 </p>
             </li>
@@ -47,14 +47,26 @@
                         .then( response => this.lessons.splice(key, 1))
                         .catch( error => console.error(error));
                 }
+            },
+            editLesson(lesson) {
+                let seriesId = this.series_id;
+                this.$emit('edit_lesson', {lesson, seriesId});
             }
         },
         components: {
             "create-lesson": require('./children/CreateLesson.vue')
         },
         mounted() {
-            this.$on('lesson_created', (payLoad) => {
-                this.lessons.push(payLoad);
+            this.$on('lesson_created', (payload) => {
+                this.lessons.push(payload);
+            });
+
+            this.$on('lesson_updated', (payload) =>{
+                let lessonIndex = this.lessons.findIndex(L => {
+                    return payload.id === L.id;
+                });
+
+                this.lessons.splice(lessonIndex, 1, payload)
             });
         }
     }
