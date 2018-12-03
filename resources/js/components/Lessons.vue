@@ -58,6 +58,10 @@
         },
         mounted() {
             this.$on('lesson_created', (payload) => {
+                window.noty({
+                    message: 'Lesson created successfully',
+                    type: 'success'
+                });
                 this.lessons.push(payload);
             });
 

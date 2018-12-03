@@ -66,9 +66,15 @@
     <!-- END Main container -->
 
     <!-- Mount vue login component (modal window) -->
-    @if( ! auth()->check())
+    {{--@if( ! auth()->check())--}}
+        {{--<vue-login></vue-login>--}}
+    {{--@endif--}}
+
+    <vue-noty></vue-noty>
+
+    @guest()
         <vue-login></vue-login>
-    @endif
+    @endguest
 
     <!-- Footer -->
     <footer class="site-footer">

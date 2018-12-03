@@ -8,7 +8,11 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.events = new Vue();
 
+window.noty = function(notification){
+    window.events.$emit('notification', notification);
+}
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -16,7 +20,7 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-
+Vue.component('vue-noty', require('./components/Noty.vue'));
 Vue.component('vue-login', require('./components/Login.vue'));
 Vue.component('vue-lessons', require('./components/Lessons.vue'));
 
