@@ -41,12 +41,17 @@
 
             <div class="topbar-right">
                 <ul class="topbar-nav nav">
+
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    @if(auth()->check() )
+                    @auth
+                        <li class="nav-item"><a class="nav-link" href="{{ route('series.index') }}">All series</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Hello {{ auth()->user()->name  }}</a></li>
-                    @else
+                        <li class="nav-item"><a class="nav-link" href="{{ route('series.create') }}">Create series</a></li>
+                    @endauth
+
+                    @guest
                         <li class="nav-item"><a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#loginModal">Login</a></li>
-                    @endif
+                    @endguest
                     <!-- added data toggle and id for login vue component -->
                 </ul>
             </div>
