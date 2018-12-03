@@ -13,6 +13,20 @@ window.events = new Vue();
 window.noty = function(notification){
     window.events.$emit('notification', notification);
 }
+
+window.handleErrors = function(error) {
+    if(error.response.status === 422) {
+        window.noty({
+            message: 'You have validation errors, please try again',
+            type: 'danger'
+        });
+    }
+
+    window.noty({
+        message: 'Something went wrong. Please refresh the page',
+        type: 'danger'
+    });
+}
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

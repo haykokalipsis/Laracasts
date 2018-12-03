@@ -44,8 +44,14 @@
             deleteLesson(lesson_id, key) {
                 if(confirm('Are you sure you wanna delete?') ) {
                     Axios.delete(`/admin/${this.series_id}/lessons/${lesson_id}`)
-                        .then( response => this.lessons.splice(key, 1))
-                        .catch( error => console.error(error));
+                        .then( (response) => {
+                            this.lessons.splice(key, 1);
+                            window.noty({
+                                message: 'Lesson deleted successfully',
+                                type: 'success'
+                            });
+                        })
+                        .catch( error => window.handleErrors(error));
                 }
             },
             editLesson(lesson) {

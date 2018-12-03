@@ -86,7 +86,8 @@
                         this.$parent.$emit('lesson_created', response.data);
                         $('#createLesson').modal('hide');
                     })
-                    .catch( (error) => console.error(error));
+                    .catch( error => window.handleErrors(error));
+
             },
             updateLesson() {
                 Axios.put(`/admin/${this.seriesId}/lessons/${this.lessonId}`, this.lesson)
@@ -94,6 +95,7 @@
                         $('#createLesson').modal('hide');
                         this.$parent.$emit('lesson_updated', response.data)
                     })
+                    .catch( error => window.handleErrors(error));
             }
         },
         mounted() {
