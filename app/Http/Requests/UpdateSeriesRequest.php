@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateSeriesRequest extends FormRequest
+class UpdateSeriesRequest extends SeriesRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,15 +25,6 @@ class UpdateSeriesRequest extends FormRequest
             'title' =>'required',
             'description' => 'required',
         ];
-    }
-
-    public function uploadSeriesImage()
-    {
-        $uploadedImage = $this->image;
-        $this->fileName = str_slug($this->title) . '.' . $uploadedImage->getClientOriginalExtension();
-        $uploadedImage->storePubliclyAs('series', $this->fileName);
-
-        return $this;
     }
 
     public function updateSeries($series)
