@@ -32,17 +32,31 @@
 
     <section class="section bg-gray">
         <div class="container">
-
             <header class="section-header">
                 <small>lessons</small>
                 <h2>Featured Screencasts</h2>
                 <hr>
                 <p class="lead"></p>
             </header>
+            @forelse($series as $s)
+                <div class="card mb-30">
+                    <div class="row">
+                        <div class="col-12 col-md-4 align-self-center">
+                            <a href=""><img src="{{ asset('storage/' . $s->image_url) }}" alt="..."></a>
+                        </div>
 
-            <div class="row gap-y">
+                        <div class="col-12 col-md-8">
+                            <div class="card-block">
+                                <h4 class="card-title">{{ $s->title }}</h4>
 
-            </div>
+                                <p class="card-text">{{ $s->description }}</p>
+{{--                                <a class="fw-600 fs-12" href="{{ route('series', $s->slug) }}">Read more <i class="fa fa-chevron-right fs-9 pl-8"></i></a>--}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+            @endforelse
 
         </div>
     </section>
