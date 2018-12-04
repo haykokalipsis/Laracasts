@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSeriesRequest;
+use App\Http\Requests\UpdateSeriesRequest;
 use App\Series;
 use Illuminate\Http\Request;
 
@@ -76,9 +77,9 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Series $series)
     {
-        //
+        return view('admin.series.edit')->with('series', $series);
     }
 
     /**
@@ -88,9 +89,9 @@ class SeriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSeriesRequest $request, Series $series)
     {
-        //
+        return $request->updateSeries($series);
     }
 
     /**
