@@ -42,7 +42,8 @@
                 <div class="card mb-30">
                     <div class="row">
                         <div class="col-12 col-md-4 align-self-center">
-                            <a href=""><img src="{{ asset('storage/' . $s->image_url) }}" alt="..."></a>
+{{--                            <a href=""><img src="{{ asset('storage/' . $s->image_url) }}" alt="..."></a>--}}
+                            <a href=""><img src="{{ $s->image_path }}" alt="..."></a>
                         </div>
 
                         <div class="col-12 col-md-8">

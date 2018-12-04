@@ -23,4 +23,9 @@ class Series extends Model
     {
         return $this->hasMany(Lesson::class);
     }
+    
+    public function getImagePathAttribute()
+    {
+        return asset('storage/' . $this->image_url);
+    } 
 }
