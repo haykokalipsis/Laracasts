@@ -9,21 +9,21 @@
 
                     <h1 class="display-4 hidden-sm-down">{{ $series->title }}</h1>
                     <h1 class="hidden-md-up">{{ $series->title }}</h1>
-                    <br>
-                    <p class="lead text-whit fs-20 hidden-sm-down">Little course description</p>
-                    <br><br><br>
+                    <br><br><br><br>
 
-                    @if(auth()->user() )
+                    @auth
 
-                        @if(auth()->user()->hasStartedSeries($series))
-                            <a href="" class="btn btn-lg btn-primary mr-16 btn-round">Continue Learning </a>
+                        {{--@if(auth()->user()->hasStartedSeries($series))--}}
+                        @hasStartedSeries($series)
+                            <a href="{{ route('series.learning', $series->slug) }}" class="btn btn-lg btn-primary mr-16 btn-round">Continue LEARNING</a>
                         @else
-                            <a href="" class="btn btn-lg btn-primary mr-16 btn-round">Continue Learning </a>
-                        @endif
+                            <a href="{{ route('series.learning', $series->slug) }}" class="btn btn-lg btn-primary mr-16 btn-round">START LEARNING</a>
+                        @endhasStartedSeries($series)
+                        {{--@endif--}}
 
                     @else
                         <a href="{{ route('series.learning', $series->slug) }}" class="btn btn-lg btn-primary mr-16 btn-round">START LEARNING</a>
-                    @endif
+                    @endauth
                 </div>
 
                 <div class="col-12 align-self-end text-center">
