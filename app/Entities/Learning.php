@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Lesson;
 use Redis;
 
 trait Learning
@@ -22,6 +23,28 @@ trait Learning
 
     public function getNumberOfCompletedLessonsForSeries($series)
     {
-        return count(Redis::smembers("user:{$this->id}|series:{$series->id}") );
+        return count($this->getCompletedLessonsForASeries($series));
     }
+    
+    public function hasStartedSeries($series)
+    {
+        return $this->getNumberOfCompletedLessonsForSeries($series) > 0;
+    } 
+
+    public function getCompletedLessonsForASeries($series)
+    {
+        return Redis::smembers("user:{$this->id}|series:{$series->id}");
+    }
+
+    public function getCompletedLessons($series)
+    {
+        // Get ids of completed lessons as array. 1, 2, 5
+        $completedLessons = $this->getCompletedLessonsForASeries($series);
+
+        // Make, transform collection of lessons from those ids
+        return collect($completedLessons)->map(function ($lessonId) {
+            return Lesson::find($lessonId);
+        });
+    }
+
 }
