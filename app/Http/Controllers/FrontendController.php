@@ -12,5 +12,10 @@ class FrontendController extends Controller
     {
         return view('welcome')->with('series', Series::all() );
     }
+    
+    public function series(Series $series)
+    {
+        return view('frontend.series')->with('series', $series);
+    } 
 
 }

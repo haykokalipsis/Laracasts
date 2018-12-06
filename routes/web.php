@@ -16,8 +16,7 @@ Route::get('/logout', function () {
     auth()->logout();
 });
 
-//Route::get('/', 'FrontendController@welcome');
-
+Route::get('/', 'FrontendController@welcome');
 
 Route::get('/redis', function() {
 /*
@@ -40,7 +39,7 @@ Route::get('/redis', function() {
     dd(Redis::smembers('frontend'));
 });
 
-
+Route::get('series/{series}', 'FrontendController@series')->name('series');
 Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
 
 Route::get('{series_by_id}', function (\App\Series $series) {
