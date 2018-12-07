@@ -21,25 +21,23 @@
     <div class="section bg-grey">
         <div class="container">
 
-            @php
-                $nextLesson = $lesson->getNextLesson();
-                $prevLesson = $lesson->getPrevLesson();
-            @endphp
+            {{--@php--}}
+                {{--$nextLesson = $lesson->getNextLesson();--}}
+                {{--$prevLesson = $lesson->getPrevLesson();--}}
+            {{--@endphp--}}
 
             <div class="row gap-y text-center">
                 <div class="col-12">
                     <vue-player default_lesson="{{ $lesson }}"
-                                @if($nextLesson->id !== $lesson->id)
-                                    next_lesson_url="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $nextLesson->id ]) }}"
-                                @endif
+
                     ></vue-player>
 
-                    @if($prevLesson->id !== $lesson->id)
-                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $prevLesson->id ]) }}" class="btn btn-info btn-lg pull-left">Prev Lesson</a>
+                    @if($lesson->getPreviousLesson() )
+                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $lesson->getPreviousLesson()->id]) }}" class="btn btn-info">Previous Lesson</a>
                     @endif
 
-                    @if($nextLesson->id !== $lesson->id)
-                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $nextLesson->id ]) }}" class="btn btn-info btn-lg pull-right">Next Lesson</a>
+                    @if($lesson->getNextLesson() )
+                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $lesson->getNextLesson()->id]) }}" class="btn btn-info">Next Lesson</a>
                     @endif
 
                 </div>
@@ -53,9 +51,9 @@
                                 @endif
                             ">
 
-                                @if(auth()->user()->hasCompletedLesson($l))
-                                    <b><small>COMPLETED</small></b>
-                                @endif
+                                {{--@if(auth()->user()->hasCompletedLesson($l))--}}
+                                    {{--<b><small>COMPLETED</small></b>--}}
+                                {{--@endif--}}
                                 <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $l->id]) }}">{{ $l->title }}</a>
                             </li>
                         @endforeach

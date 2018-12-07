@@ -12,7 +12,7 @@ window.events = new Vue();
 
 window.noty = function(notification){
     window.events.$emit('notification', notification);
-}
+};
 
 window.handleErrors = function(error) {
     if(error.response.status === 422) {
@@ -26,7 +26,7 @@ window.handleErrors = function(error) {
         message: 'Something went wrong. Please refresh the page',
         type: 'danger'
     });
-}
+};
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -35,6 +35,7 @@ window.handleErrors = function(error) {
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 Vue.component('vue-noty', require('./components/Noty.vue'));
+Vue.component('vue-player', require('./components/Player.vue'));
 Vue.component('vue-login', require('./components/Login.vue'));
 Vue.component('vue-lessons', require('./components/Lessons.vue'));
 
