@@ -16,8 +16,12 @@
         },
         methods: {
             displayVideoEndedAlert() {
-                swal("Good job!", "You completed this lesson, go to next one!", "success")
-                    .then( () => window.location = this.next_lesson_url );
+                if(this.next_lesson_url) {
+                    swal("Good job!", "You completed this lesson, go to next one!", "success")
+                        .then( () => window.location = this.next_lesson_url );
+                } else {
+                    swal("Congratulations!", "You completed this series!");
+                }
             }
         },
         mounted() {

@@ -21,25 +21,29 @@
     <div class="section bg-grey">
         <div class="container">
 
-            {{--@php--}}
-                {{--$nextLesson = $lesson->getNextLesson();--}}
-                {{--$prevLesson = $lesson->getPrevLesson();--}}
-            {{--@endphp--}}
+            {{--We are getting those lessons here, for th purpose of not duplicating the query multiple times --}}
+            {{--If you want, you can get those in controller and pass here, i dont like to clunk controllers--}}
+            @php
+                $nextLesson = $lesson->getNextLesson();
+                $previousLesson = $lesson->getPreviousLesson();
+            @endphp
 
             <div class="row gap-y text-center">
                 <div class="col-12">
 
                     <vue-player
                             default_lesson="{{ $lesson }}"
-                            next_lesson_url="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $lesson->getNextLesson()->id]) }}"
+                            @if($nextLesson)
+                                next_lesson_url="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $nextLesson->id]) }}"
+                            @endif
                     ></vue-player>
 
-                    @if($lesson->getPreviousLesson() )
-                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $lesson->getPreviousLesson()->id]) }}" class="btn btn-info">Previous Lesson</a>
+                    @if($previousLesson)
+                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $previousLesson->id]) }}" class="btn btn-info">Previous Lesson</a>
                     @endif
 
-                    @if($lesson->getNextLesson() )
-                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $lesson->getNextLesson()->id]) }}" class="btn btn-info">Next Lesson</a>
+                    @if($nextLesson)
+                        <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $nextLesson->id]) }}" class="btn btn-info">Next Lesson</a>
                     @endif
 
                 </div>
