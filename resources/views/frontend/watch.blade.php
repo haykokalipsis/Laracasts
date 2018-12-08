@@ -28,8 +28,10 @@
 
             <div class="row gap-y text-center">
                 <div class="col-12">
-                    <vue-player default_lesson="{{ $lesson }}"
 
+                    <vue-player
+                            default_lesson="{{ $lesson }}"
+                            next_lesson_url="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $lesson->getNextLesson()->id]) }}"
                     ></vue-player>
 
                     @if($lesson->getPreviousLesson() )
