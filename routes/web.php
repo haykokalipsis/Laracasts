@@ -41,6 +41,7 @@ Route::get('/redis', function() {
 
 Route::get('series/{series}', 'FrontendController@series')->name('series');
 Route::get('/watch-series/{series}', 'WatchSeriesController@index')->name('series.learning');
+Route::post('/series/complete-lesson/{lesson}', 'WatchSeriesController@completeLesson');
 Route::get('/series/{series}/lesson/{lesson}', 'watchSeriesController@showLesson')->name('series.watch');
 Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
 

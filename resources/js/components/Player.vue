@@ -5,6 +5,7 @@
 <script>
     import Player from '@vimeo/player';
     import Swal from 'sweetalert';
+    import Axios from 'axios';
 
     export default {
         name: "Player",
@@ -17,17 +18,21 @@
         methods: {
             displayVideoEndedAlert() {
                 if(this.next_lesson_url) {
-                    swal("Good job!", "You completed this lesson, go to next one!", "success")
+                    Swal("Good job!", "You completed this lesson, go to next one!", "success")
                         .then( () => window.location = this.next_lesson_url );
                 } else {
-                    swal("Congratulations!", "You completed this series!");
+                    Swal("Congratulations!", "You completed this series!");
                 }
+            },
+            completeLesson() {
+                Axios.post(`/series/complete-lesson/${this.lesson.id}`, {})
+                    .then( () =>  this.displayVideoEndedAlert() );
             }
         },
         mounted() {
             const player = new Player('handstick');
             player.on('ended', () => {
-                this.displayVideoEndedAlert();
+                this.completeLesson();
             });
         }
     }

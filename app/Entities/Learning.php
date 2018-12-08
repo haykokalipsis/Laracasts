@@ -15,7 +15,7 @@ trait Learning
 
     public function percentageCompletedForSeries($series)
     {
-        $numberOfLessonsInSeries = $series->Lessons->count();
+        $numberOfLessonsInSeries = $series->lessons->count();
         $numberOfCompletedLessons = $this->getNumberOfCompletedLessonsForSeries($series);
 
         return ($numberOfCompletedLessons / $numberOfLessonsInSeries) * 100;
@@ -29,7 +29,7 @@ trait Learning
     public function hasStartedSeries($series)
     {
         return $this->getNumberOfCompletedLessonsForSeries($series) > 0;
-    } 
+    }
 
     public function getCompletedLessonsForASeries($series)
     {
@@ -46,5 +46,13 @@ trait Learning
             return Lesson::find($lessonId);
         });
     }
+    
+    public function hasCompletedLesson($lesson)
+    {
+        return in_array(
+            $lesson->id,
+            $this->getCompletedLessonsForASeries($lesson->series)
+        );
+    } 
 
 }

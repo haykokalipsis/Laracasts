@@ -18,7 +18,7 @@
                             <a href="{{ route('series.learning', $series->slug) }}" class="btn btn-lg btn-primary mr-16 btn-round">Continue LEARNING</a>
                         @else
                             <a href="{{ route('series.learning', $series->slug) }}" class="btn btn-lg btn-primary mr-16 btn-round">START LEARNING</a>
-                        @endhasStartedSeries($series)
+                        @endhasStartedSeries
                         {{--@endif--}}
 
                     @else

@@ -57,10 +57,11 @@
                                 @endif
                             ">
 
-                                {{--@if(auth()->user()->hasCompletedLesson($l))--}}
-                                    {{--<b><small>COMPLETED</small></b>--}}
-                                {{--@endif--}}
                                 <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $l->id]) }}">{{ $l->title }}</a>
+
+                                @if(auth()->user()->hasCompletedLesson($l))
+                                    &nbsp;<b><small>COMPLETED</small></b>
+                                @endif
                             </li>
                         @endforeach
                     </ul>
