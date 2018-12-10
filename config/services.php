@@ -32,7 +32,7 @@ return [
 
     'stripe' => [
         'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
+        'key' => env('pk_test_YfIsNjYBg5qDNRc54KRSkaj8'),
         'secret' => env('STRIPE_SECRET'),
         'webhook' => [
             'secret' => env('STRIPE_WEBHOOK_SECRET'),
