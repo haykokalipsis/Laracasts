@@ -39,10 +39,12 @@ Route::get('/redis', function() {
     dd(Redis::smembers('frontend'));
 });
 
+Route::get('/subscribe', function () {
+    return view('subscribe');
+});
 Route::get('series/{series}', 'FrontendController@series')->name('series');
 Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
-
 
 Route::middleware('auth')->group(function() {
     Route::get('/watch-series/{series}', 'WatchSeriesController@index')->name('series.learning');
