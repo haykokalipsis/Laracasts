@@ -33,16 +33,16 @@
 
                     <vue-player
                             default_lesson="{{ $lesson }}"
-                            @if($nextLesson)
+                            @if($nextLesson->id !== $lesson->id)
                                 next_lesson_url="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $nextLesson->id]) }}"
                             @endif
                     ></vue-player>
 
-                    @if($previousLesson)
+                    @if($previousLesson->id !== $lesson->id)
                         <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $previousLesson->id]) }}" class="btn btn-info">Previous Lesson</a>
                     @endif
 
-                    @if($nextLesson)
+                    @if($nextLesson->id !== $lesson->id)
                         <a href="{{ route('series.watch', ['series' => $series->slug, 'lesson' => $nextLesson->id]) }}" class="btn btn-info">Next Lesson</a>
                     @endif
 

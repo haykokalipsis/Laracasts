@@ -11,7 +11,7 @@ class ProfileController extends Controller
     {
         return view('profile')
             ->withUser($user)
-            ->with('seriesBeingWatched', $user-seriesBeingWatched() );
+            ->with('seriesBeingWatched', $user->seriesBeingWatchedByUser() );
     }
 
 

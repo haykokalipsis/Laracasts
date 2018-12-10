@@ -70,15 +70,10 @@ trait Learning
             array_push($seriesIds, $serieId);
         endforeach;
 
-        $seriesCollection = collect($seriesIds)->filter;
-        $seriesCollection->map(function ($id) {
-            return Series::find($id);
-        });
-
-        return collect($seriesIds->map(function ($id) {
+        return collect($seriesIds)->map(function ($id) {
                 return Series::find($id);
-            })-filter() // remove all null or false values from collection
-        );
+            })->filter(); // remove all null or false values from collection
+//        );
 
     }
     
@@ -94,6 +89,14 @@ trait Learning
         endforeach;
 
         return $result;
+    }
+
+    public function getNextLessonToWatch($series)
+    {
+        // end() is a php function that gives last element of array
+        $completedLessonsForASeries = $this->getCompletedLessonsForASeries($series);
+        $lastCompletedLessonId = end($completedLessonsForASeries);
+        return Lesson::find($lastCompletedLessonId)->getNextLesson();
     }
 
 }

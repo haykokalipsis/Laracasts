@@ -44,9 +44,12 @@
 
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     @auth
-                        <li class="nav-item"><a class="nav-link" href="{{ route('series.index') }}">All series</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Hello {{ auth()->user()->name  }}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('series.create') }}">Create series</a></li>
+                        @admin
+                            <li class="nav-item"><a class="nav-link" href="{{ route('series.index') }}">All series</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('series.create') }}">Create series</a></li>
+                        @endadmin
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('profile', auth()->user()->name) }}">Hey {{ auth()->user()->name  }}</a></li>
                     @endauth
 
                     @guest
