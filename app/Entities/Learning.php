@@ -70,12 +70,16 @@ trait Learning
             array_push($seriesIds, $serieId);
         endforeach;
 
-        $seriesCollection = collect($seriesIds);
+        $seriesCollection = collect($seriesIds)->filter;
         $seriesCollection->map(function ($id) {
             return Series::find($id);
         });
 
-        return $seriesCollection;
+        return collect($seriesIds->map(function ($id) {
+                return Series::find($id);
+            })-filter() // remove all null or false values from collection
+        );
+
     }
     
     public function getTotalNumberOfCompletedLessons()
