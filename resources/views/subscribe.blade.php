@@ -18,7 +18,7 @@
 @section('content')
     <section class="section" id="section-vtab">
         <div class="container text-center">
-            <vue-stripe></vue-stripe>
+            <vue-stripe email="{{ auth()->user()->email }}"></vue-stripe>
         </div>
     </section>
 @endsection

@@ -39,14 +39,22 @@ Route::get('/redis', function() {
     dd(Redis::smembers('frontend'));
 });
 
-Route::get('/subscribe', function () {
-    return view('subscribe');
-});
+
 Route::get('series/{series}', 'FrontendController@series')->name('series');
 Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
 Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
+Route::post('/subscribe', function() {
+    return auth()->user()
+        ->newSubscription(
+            request('plan'), request('plan'))
+        ->create(request('stripeToken'));
+});
 
 Route::middleware('auth')->group(function() {
+    Route::post('/card/update','ProfileController@updateCard');
+    Route::get('/subscribe', 'SubscriptionController@showSubscriptionForm');
+    Route::post('/subscribe', 'SubscriptionController@subscribe');
+    Route::post('/subscription/change', 'SubscriptionController@change')->name('subscription.change');
     Route::get('/watch-series/{series}', 'WatchSeriesController@index')->name('series.learning');
     Route::post('/series/complete-lesson/{lesson}', 'WatchSeriesController@completeLesson');
     Route::get('/series/{series}/lesson/{lesson}', 'watchSeriesController@showLesson')->name('series.watch');

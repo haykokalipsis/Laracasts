@@ -43,6 +43,7 @@ class User extends Authenticatable
         'name', 'email', 'password', 'confirm_token',
     ];
 
+    protected $with = ['subscriptions'];
     /**
      * The attributes that should be hidden for arrays.
      *

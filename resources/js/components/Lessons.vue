@@ -16,7 +16,7 @@
             </li>
         </ul>
 
-        <create-lesson/>
+        <create-lesson></create-lesson>
 
     </div>
 </template>

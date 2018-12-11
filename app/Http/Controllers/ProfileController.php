@@ -14,5 +14,16 @@ class ProfileController extends Controller
             ->with('seriesBeingWatched', $user->seriesBeingWatchedByUser() );
     }
 
+    public function updateCard()
+    {
+        $this->validate(request(), [
+            'stripeToken' => 'required'
+        ]);
+
+        $token = request('stripeToken');
+        $user = auth()->user();
+        $user->updateCard($token);
+        return response()->json(['ok']);
+    }
 
 }

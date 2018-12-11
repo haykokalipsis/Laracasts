@@ -30,12 +30,17 @@ class WatchSeriesController extends Controller
 
     public function showLesson(Series $series, Lesson $lesson)
     {
-        return view('frontend.watch',
-            [
-                'series' => $series,
-                'lesson' => $lesson
-            ]);
-    } 
+        if( ! auth()->user()->subscribedToPlan(['monthly', 'yearly']) ) {
+            return redirect('/subscribe');
+        } else {
+            return view('frontend.watch',
+                [
+                    'series' => $series,
+                    'lesson' => $lesson
+                ]);
+        }
+
+    }
     
     public function completeLesson(Lesson $lesson)
     {
