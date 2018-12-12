@@ -27,11 +27,10 @@
     <h5 class="text-uppercase text-center">Register</h5>
     <br><br>
 
-    <form class="form-type-material" method="post" action="/register">
-        @csrf
-
+    <form class="form-type-material" action="/register" method="post">
+        {{ csrf_field() }}
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username" name="name">
+            <input type="text" class="form-control" placeholder="Full name" name="name">
         </div>
 
         <div class="form-group">
@@ -40,10 +39,6 @@
 
         <div class="form-group">
             <input type="password" class="form-control" placeholder="Password" name="password">
-        </div>
-
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password (confirm)" name="password_confirmation">
         </div>
 
         <div class="form-group">
@@ -73,3 +68,4 @@
 
 </body>
 </html>
+
