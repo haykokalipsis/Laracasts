@@ -34,7 +34,7 @@ window.handleErrors = function(error) {
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-Vue.component('vue-noty', require('./components/Noty.vue'));
+Vue.component('vue-noty', require('./components/Noty-SweetAlert.vue'));
 Vue.component('vue-player', require('./components/Player.vue'));
 Vue.component('vue-stripe', require('./components/Stripe.vue'));
 Vue.component('vue-update-card', require('./components/UpdateCard.vue'));
