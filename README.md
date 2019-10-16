@@ -1,2 +1,2 @@
 # Laracasts
-Laracasts clone. Videos player from Vimeo.
+Laracasts clone. Uses Vimeos video player.
