@@ -1,2 +1,2 @@
 # Laracasts
-Laracasts clone tutorial
+Laracasts clone. Videos player from Vimeo.
