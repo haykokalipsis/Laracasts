@@ -1,2 +1,2 @@
 # Laracasts
-Laracasts clone tutorial
+Laracasts clone. Uses Vimeos video player.
