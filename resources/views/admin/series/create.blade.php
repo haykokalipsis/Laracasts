@@ -9,7 +9,7 @@
             <div class="col-12 col-lg-8 offset-lg-2">
 
                 <h1>Create a new series</h1>
-                <p class="fs-20 opacity-70">You can find several product design by our professional team in this section.</p>
+        	<p class="fs-20 opacity-70">Let's make the world a better place for coders</p>
 
             </div>
         </div>

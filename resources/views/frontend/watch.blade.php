@@ -21,7 +21,7 @@
     <div class="section bg-grey">
         <div class="container">
 
-            {{--We are getting those lessons here, for th purpose of not duplicating the query multiple times --}}
+            {{--We are getting those lessons here, for the purpose of not duplicating the query multiple times --}}
             {{--If you want, you can get those in controller and pass here, i dont like to clunk controllers--}}
             @php
                 $nextLesson = $lesson->getNextLesson();

@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 class WatchSeriesController extends Controller
 {
     
+    /**
+     * Watch a series
+     *
+     * @param Bahdcasts\Series $series
+     * @return redirect
+     */
     public function index(Series $series)
     {
         $user = auth()->user();
@@ -18,30 +24,43 @@ class WatchSeriesController extends Controller
                 [
                     'series' => $series->slug,
                     'lesson' => $user->getNextLessonToWatch($series)
-                ]);
-        } else {
-            return redirect()->route('series.watch',
-                [
-                    'series' => $series->slug,
-                    'lesson' => $series->lessons->first()->id
-                ]);
+            ]);
         }
+        
+        return redirect()->route('series.watch', [   
+                'series' => $series->slug, 
+                'lesson' => $series->lessons->first()->id 
+        ]);
     }
 
+     /**
+     * Show a lesson page
+     *
+     * @param Bahdcasts\Series $series
+     * @param Bahdcasts\Lesson $lesson
+     * @return view
+     */
     public function showLesson(Series $series, Lesson $lesson)
     {
         if( ! auth()->user()->subscribedToPlan(['monthly', 'yearly']) ) {
             return redirect('/subscribe');
-        } else {
-            return view('frontend.watch',
-                [
-                    'series' => $series,
-                    'lesson' => $lesson
-                ]);
-        }
+        } 
+
+        return view('frontend.watch',
+            [
+                'series' => $series,
+                'lesson' => $lesson
+            ]);
+    
 
     }
     
+     /**
+     * Complete a lesson via ajax
+     *
+     * @param Bahdcasts\Lesson $lesson
+     * @return json response
+     */
     public function completeLesson(Lesson $lesson)
     {
         auth()->user()->completeLesson($lesson);

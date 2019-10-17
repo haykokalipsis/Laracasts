@@ -54,6 +54,7 @@
                     @endauth
 
                     @guest
+             	        <li class="nav-item"><a href="{{ route('all-series') }}" class="nav-link">All series</a></li>
                         <li class="nav-item"><a class="nav-link" href="javascript:;" data-toggle="modal" data-target="#loginModal">Login</a></li>
                     @endguest
                     <!-- added data toggle and id for login vue component -->
@@ -81,7 +82,7 @@
 
     <vue-noty></vue-noty>
 
-    @guest()
+    @guest
         <vue-login></vue-login>
     @endguest
 

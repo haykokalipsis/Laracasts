@@ -59,6 +59,7 @@ class SeriesController extends Controller
 //        return redirect()->back();
 //    }
 
+   
     /**
      * Display the specified resource.
      *
@@ -67,8 +68,6 @@ class SeriesController extends Controller
      */
     public function show(Series $series)
     {
-//        dd(Series::find($id) );
-//        dd($series);
         return view('admin.series.index')->with('series', $series);
     }
 
@@ -103,6 +102,10 @@ class SeriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
+    
+
+
+
 }

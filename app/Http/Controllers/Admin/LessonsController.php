@@ -35,7 +35,7 @@ class LessonsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Http\Response
      */
     public function store(Series $series, CreateLessonRequest $request)
     {
@@ -83,7 +83,6 @@ class LessonsController extends Controller
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
-     * @throws \Exception
      */
     public function destroy(Series $series, Lesson $lesson)
     {

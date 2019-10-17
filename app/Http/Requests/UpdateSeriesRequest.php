@@ -23,13 +23,18 @@ class UpdateSeriesRequest extends SeriesRequest
     {
         return [
             'title' =>'required',
-            'description' => 'required',
+            'description' => 'required'
         ];
     }
 
-    public function updateSeries($series)
-    {
-        if($this->hasFile('image') ) {
+    /**
+     * Update a series into database
+     *
+     * @param [Bahdcasts\Series] $series
+     * @return void
+     */
+    public function updateSeries($series) {
+        if($this->hasFile('image')) {
             $series->image_url = 'series/' . $this->uploadSeriesImage()->fileName;
         }
 
@@ -43,4 +48,6 @@ class UpdateSeriesRequest extends SeriesRequest
 
         return redirect()->route('series.index');
     }
+
+
 }

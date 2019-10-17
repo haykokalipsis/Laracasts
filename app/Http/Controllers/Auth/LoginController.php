@@ -39,6 +39,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
     protected function authenticated(Request $request, $user)
     {
         session()->flash('success', 'Successfully logged in.');
@@ -46,9 +53,9 @@ class LoginController extends Controller
             return response()->json([
                 'status' => 'ok'
             ]);
-        } else {
-            return redirect('/');
-        }
+        } 
+
+        return redirect('/');
     }
 
     /**

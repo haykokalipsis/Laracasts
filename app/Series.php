@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Lesson;
 
 class Series extends Model
 {
@@ -19,18 +20,26 @@ class Series extends Model
         return 'slug';
     }
 
-    public function lessons()
+    public function Lessons()
     {
         return $this->hasMany(Lesson::class);
     }
-    
-    public function getImagePathAttribute()
-    {
+
+    /**
+     * Return the public path for series image
+     *
+     * @return string
+     */
+    public function getImagePathAttribute() {
         return asset('storage/' . $this->image_url);
     }
 
-    public function getOrderedLessons()
-    {
+    /**
+     * Get a list of lessons for series in watching order
+     *
+     * @return void
+     */
+    public function getOrderedLessons() {
         return $this->lessons()->orderBy('episode_number', 'asc')->get();
     }
 }

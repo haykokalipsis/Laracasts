@@ -1,23 +1,25 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Auth::routes();
-Route::get('/logout', function () {
-    auth()->logout();
+Route::get('/', 'FrontendController@welcome');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
+Route::get('series/{series}', 'FrontendController@series')->name('series');
+Route::get('/logout', function() { auth()->logout(); return redirect('/'); });
+Route::get('series/', 'FrontendController@showAllSeries')->name('all-series');
+Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
+
+Route::middleware('auth')->group(function() {
+    Route::post('/card/update','ProfileController@updateCard');
+    Route::post('/subscribe', 'SubscriptionController@subscribe');
+    Route::post('/subscription/change', 'SubscriptionController@change')->name('subscription.change');
+    Route::get('/subscribe', 'SubscriptionController@showSubscriptionForm');
+    Route::post('/series/complete-lesson/{lesson}', 'WatchSeriesController@completeLesson');
+    Route::get('/watch-series/{series}', 'WatchSeriesController@index')->name('series.learning');
+    Route::get('/series/{series}/lesson/{lesson}', 'watchSeriesController@showLesson')->name('series.watch');
 });
 
-Route::get('/', 'FrontendController@welcome');
-
+// Just a hint for Redis methods. Realization is in app/Entities/Learning.php trait
 Route::get('/redis', function() {
 /*
     Redis has 3 datatypes.
@@ -38,25 +40,3 @@ Route::get('/redis', function() {
     Redis::sadd('frontend', ['angular', 'ember']);
     dd(Redis::smembers('frontend'));
 });
-
-
-Route::get('series/{series}', 'FrontendController@series')->name('series');
-Route::get('/register/confirm', 'ConfirmEmailController@index')->name('confirm-email');
-Route::get('/profile/{user}', 'ProfileController@index')->name('profile');
-Route::post('/subscribe', function() {
-    return auth()->user()
-        ->newSubscription(
-            request('plan'), request('plan'))
-        ->create(request('stripeToken'));
-});
-
-Route::middleware('auth')->group(function() {
-    Route::post('/card/update','ProfileController@updateCard');
-    Route::get('/subscribe', 'SubscriptionController@showSubscriptionForm');
-    Route::post('/subscribe', 'SubscriptionController@subscribe');
-    Route::post('/subscription/change', 'SubscriptionController@change')->name('subscription.change');
-    Route::get('/watch-series/{series}', 'WatchSeriesController@index')->name('series.learning');
-    Route::post('/series/complete-lesson/{lesson}', 'WatchSeriesController@completeLesson');
-    Route::get('/series/{series}/lesson/{lesson}', 'watchSeriesController@showLesson')->name('series.watch');
-});
-

@@ -9,7 +9,7 @@
                 <div class="col-12 col-lg-8 offset-lg-2">
 
                     <h1>Edit {{ $series->title }}</h1>
-                    <p class="fs-20 opacity-70">You can find several product design by our professional team in this section.</p>
+       		    <p class="fs-20 opacity-70">Let's make the world a better place for coders</p>
 
                 </div>
             </div>
@@ -28,8 +28,10 @@
 
                     <form action="{{ route('series.update', $series->slug)  }}" method="POST" enctype="multipart/form-data">
                         {{--{{ csrf_field() }}--}}
-                        {{--{{ method_fiield('PUT') }}--}}
                         @csrf
+                        
+                        {{-- <input type="hidden" name="_method" value="PATCH"> --}}
+                        {{--{{ method_fiield('PUT') }}--}}
                         @method('PUT')
 
                         <div class="form-group">
